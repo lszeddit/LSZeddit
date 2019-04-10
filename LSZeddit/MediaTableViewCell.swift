@@ -9,6 +9,15 @@
 import UIKit
 
 class MediaTableViewCell: UITableViewCell {
+    
+    
+    
+    @IBOutlet weak var postTitleLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var postAuthorLabel: UILabel!
+    @IBOutlet weak var postTimeLabel: UILabel!
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

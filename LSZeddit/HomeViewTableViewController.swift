@@ -12,6 +12,7 @@ class HomeViewTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        viewModel.delegate = self
     }
 
     // MARK: - Table view data source
@@ -24,15 +25,17 @@ class HomeViewTableViewController: UITableViewController {
         return viewModel.getItemCount()
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: Strings.postCell.rawValue, for: indexPath) as! MediaTableViewCell
 
-        // Configure the cell...
+        
+        cell = viewModel.configureCell(at: indexPath.row, cell: cell)
+        print(cell.postTimeLabel.text)
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -79,4 +82,15 @@ class HomeViewTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension HomeViewTableViewController: HomeViewViewModelDelegate{
+    func updateViews() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+    
 }

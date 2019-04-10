@@ -19,12 +19,12 @@ class RedditAPIManager {
     
     
     func getTopPosts(onComplete: @escaping(Any?) -> Void){
-        let stringURL : String = baseURL + RedditAPIManager.getNewEndpoint
+        let stringURL : String = baseURL
         
         
         guard let url = URL(string: "https://www.reddit.com/top.json?limit=50") else {return}
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             guard let data = data else {return}
             
@@ -58,10 +58,12 @@ struct PostData: Codable{
     var subreddit: String
     var title: String
     var thumbnail: String?
+    var author: String
     
     private enum CodingKeys: String, CodingKey{
         case title
         case subreddit
         case thumbnail
+        case author = "author_fullname"
     }
 }

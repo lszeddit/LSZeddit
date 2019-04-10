@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q5I-o5-pzx">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Home View Table View Controller-->
         <scene sceneID="64G-JR-Yqq">
             <objects>
-                <tableViewController id="q5I-o5-pzx" sceneMemberID="viewController">
+                <tableViewController id="q5I-o5-pzx" customClass="HomeViewTableViewController" customModule="LSZeddit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ubk-nQ-KqG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="382" id="11W-zA-Fy1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="382" id="11W-zA-Fy1" customClass="MediaTableViewCell" customModule="LSZeddit" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="382"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11W-zA-Fy1" id="yrn-xC-C08">
@@ -87,6 +87,12 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="hcP-hI-z79" secondAttribute="trailing" id="drd-V7-BtP"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postAuthorLabel" destination="NhL-vH-IaU" id="nHT-my-y3O"/>
+                                    <outlet property="postImageView" destination="EXQ-MK-DZ2" id="WeE-1i-oDU"/>
+                                    <outlet property="postTimeLabel" destination="iUS-Zg-452" id="Lh6-di-ymm"/>
+                                    <outlet property="postTitleLabel" destination="JBM-2C-0Pq" id="Dzk-pN-sLM"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3BX-SB-TGp">
                                 <rect key="frame" x="0.0" y="410" width="414" height="44"/>
@@ -110,8 +116,12 @@
                             <outlet property="delegate" destination="q5I-o5-pzx" id="kDl-z6-7ks"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="viewModel" destination="338-UA-ddW" id="xWu-lo-LlA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVh-gT-Tmq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="338-UA-ddW" customClass="HomeViewViewModel" customModule="LSZeddit" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="356.52173913043481" y="-68.303571428571431"/>
         </scene>

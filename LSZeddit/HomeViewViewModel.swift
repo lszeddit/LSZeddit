@@ -1,8 +1,13 @@
 import Foundation
 
+protocol HomeViewViewModelDelegate {
+    func updateViews()
+}
+
 class HomeViewViewModel: NSObject{
     
     fileprivate var posts = [Post]()
+    var delegate: HomeViewViewModelDelegate?
     
     override init() {
         super.init()
@@ -19,6 +24,7 @@ class HomeViewViewModel: NSObject{
             print(response.data.children.count)
             
             self.posts = response.data.children
+            self.delegate?.updateViews()
         }
     }
     
@@ -41,5 +47,16 @@ class HomeViewViewModel: NSObject{
     
     func getSectionsCount() -> Int {
         return 1
+    }
+    
+    func configureCell(at index: Int, cell: MediaTableViewCell) -> MediaTableViewCell {
+        let postData = posts[index].data
+        cell.postTitleLabel.text = postData.title
+        cell.postAuthorLabel.text = postData.author
+        if let thumbnailString = postData.thumbnail{
+            print("HAS a thumbnail")
+            //do something with thumbnail
+        }
+        return cell
     }
 }
