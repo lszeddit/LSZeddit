@@ -1,4 +1,5 @@
 import Foundation
+import SDWebImage
 
 protocol HomeViewViewModelDelegate {
     func updateViews()
@@ -49,13 +50,29 @@ class HomeViewViewModel: NSObject{
         return 1
     }
     
+    func getCommentCount(for postData: PostData) -> String{
+        let count = postData.commentCount
+        if count < 1 || count > 1 {
+            return "\(count) comments"
+        }
+        return "1 comment"
+    }
+    
+    func getUpvoteCount(for postData: PostData) -> String {
+        return "\(postData.score)"
+    }
+    
     func configureCell(at index: Int, cell: MediaTableViewCell) -> MediaTableViewCell {
         let postData = posts[index].data
         cell.postTitleLabel.text = postData.title
         cell.postAuthorLabel.text = postData.author
+        cell.postTimeLabel.text = Date.getAge(of: postData.created)
+        cell.postCommentCountLabel.text = getCommentCount(for: postData)
+        cell.postUpvoteCountLabel.text = getUpvoteCount(for: postData)
         if let thumbnailString = postData.thumbnail{
-            print("HAS a thumbnail")
+            print(thumbnailString)
             //do something with thumbnail
+            cell.postImageView.sd_setImage(with: URL(string: postData.url), placeholderImage: UIImage(named: "lszeddit_placeholder.png"))
         }
         return cell
     }

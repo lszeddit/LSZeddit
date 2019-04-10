@@ -22,7 +22,6 @@ extension Date{
         } else if ageComponents.day != 0 {
             return "\(ageComponents.day!)d"
         } else if ageComponents.hour != 0 {
-            print(ageComponents.hour!)
             return "\(ageComponents.hour!)h"
         } else if ageComponents.minute != 0{
             return "\(ageComponents.minute!)m"

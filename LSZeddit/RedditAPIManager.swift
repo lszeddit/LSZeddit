@@ -59,11 +59,19 @@ struct PostData: Codable{
     var title: String
     var thumbnail: String?
     var author: String
+    var created: Double
+    var commentCount: Int
+    var score: Int
+    var url: String
     
     private enum CodingKeys: String, CodingKey{
         case title
         case subreddit
         case thumbnail
         case author = "author_fullname"
+        case created
+        case commentCount = "num_comments"
+        case score
+        case url
     }
 }
