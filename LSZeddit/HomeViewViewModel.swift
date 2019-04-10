@@ -69,12 +69,50 @@ class HomeViewViewModel: NSObject{
         cell.postTimeLabel.text = Date.getAge(of: postData.created)
         cell.postCommentCountLabel.text = getCommentCount(for: postData)
         cell.postUpvoteCountLabel.text = getUpvoteCount(for: postData)
-        if let thumbnailString = postData.thumbnail{
-            print(thumbnailString)
-            //do something with thumbnail
-            cell.postImageView.sd_setImage(with: URL(string: postData.url), placeholderImage: UIImage(named: "lszeddit_placeholder.png"))
+        
+        if !postData.isSelf{
+            if let hint = PostHint(rawValue: postData.postHint!){
+                
+                switch hint {
+                case PostHint.image:
+                    cell.postSelfTextLabel.isHidden = true
+                    cell.postImageView.isHidden = false
+                    cell.postImageView.sd_setImage(with: URL(string: postData.url), placeholderImage: UIImage(named: "lszeddit_placeholder.png"))
+                case PostHint.isSelf:
+                    cell.postImageView.isHidden = true
+                    cell.postSelfTextLabel.isHidden = false
+                    cell.postSelfTextLabel.text = postData.selfText
+                    break
+                case PostHint.richVideo:
+                    //TODO: Implement video
+                    cell.postImageView.isHidden = true
+                    cell.postSelfTextLabel.isHidden = true
+                    break
+                case PostHint.hostedVideo:
+                    //TODO: Implement video
+                    cell.postImageView.isHidden = true
+                    cell.postSelfTextLabel.isHidden = true
+                    break
+                    
+                default:
+                    break
+                }
+            }
+        }else{
+            cell.postImageView.isHidden = true
+            cell.postSelfTextLabel.isHidden = false
+            cell.postSelfTextLabel.text = postData.selfText
         }
+        
+        
         return cell
     }
 }
 
+enum PostHint: String {
+    case image = "image"
+    case isSelf = "self"
+    case hostedVideo = "hosted:video"
+    case richVideo = "rich:video"
+    case link = "link"
+}

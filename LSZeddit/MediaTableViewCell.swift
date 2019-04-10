@@ -18,6 +18,7 @@ class MediaTableViewCell: UITableViewCell {
     @IBOutlet weak var postTimeLabel: UILabel!
     @IBOutlet weak var postCommentCountLabel: UILabel!
     @IBOutlet weak var postUpvoteCountLabel: UILabel!
+    @IBOutlet weak var postSelfTextLabel: UILabel!
     
 
     override func awakeFromNib() {
