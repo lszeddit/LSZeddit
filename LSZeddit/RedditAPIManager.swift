@@ -55,7 +55,7 @@ struct Post: Codable{
 }
 
 struct PostData: Codable{
-    var subreddit: String
+    
     var title: String
     var thumbnail: String?
     var author: String
@@ -63,15 +63,20 @@ struct PostData: Codable{
     var commentCount: Int
     var score: Int
     var url: String
+    var postHint: String?
+    var selfText: String?
+    var isSelf: Bool
     
     private enum CodingKeys: String, CodingKey{
         case title
-        case subreddit
         case thumbnail
-        case author = "author_fullname"
+        case author 
         case created
         case commentCount = "num_comments"
         case score
         case url
+        case postHint = "post_hint"
+        case selfText = "selftext"
+        case isSelf = "is_self"
     }
 }
