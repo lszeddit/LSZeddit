@@ -46,6 +46,11 @@ class HomeViewViewModel: NSObject{
         return posts.count
     }
     
+    
+    func getItemURL(for indexPath: IndexPath) -> String{
+        return posts[indexPath.row].data.url
+    }
+    
     func getSectionsCount() -> Int {
         return 1
     }
@@ -106,6 +111,25 @@ class HomeViewViewModel: NSObject{
         
         
         return cell
+    }
+    
+    func shouldOpenInSafari(with indexPath: IndexPath) -> Bool {
+        let postData = posts[indexPath.row].data
+        if !postData.isSelf{
+            if let hint = PostHint(rawValue: postData.postHint!){
+                switch hint {
+                case PostHint.image:
+                    return false
+                default:
+                    return true
+                }
+            }
+        }
+        return true
+    }
+    
+    func handleSelection(at indexPath: IndexPath){
+        
     }
 }
 
