@@ -1,11 +1,3 @@
-//
-//  Date+Extension.swift
-//  LSZeddit
-//
-//  Created by Carlos Acosta on 4/10/19.
-//  Copyright © 2019 LSZTech. All rights reserved.
-//
-
 import Foundation
 
 extension Date{
