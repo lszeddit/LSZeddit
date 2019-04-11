@@ -100,6 +100,8 @@ class HomeViewViewModel: NSObject{
                     break
                     
                 default:
+                    cell.postImageView.isHidden = true
+                    cell.postSelfTextLabel.isHidden = true
                     break
                 }
             }
