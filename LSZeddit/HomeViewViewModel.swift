@@ -116,6 +116,8 @@ class HomeViewViewModel: NSObject{
     }
     
     func shouldOpenInSafari(with indexPath: IndexPath) -> Bool {
+        
+        
         let postData = posts[indexPath.row].data
         if !postData.isSelf{
             if let hint = PostHint(rawValue: postData.postHint!){

@@ -30,10 +30,10 @@ class HomeViewTableViewController: UITableViewController {
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if viewModel.shouldOpenInSafari(with: indexPath){
+        
             let safariView = SFSafariViewController(url: URL(string: viewModel.getItemURL(for: indexPath))!)
             self.present(safariView, animated: true, completion: nil)
-        }
+        
     }
 
     /*
