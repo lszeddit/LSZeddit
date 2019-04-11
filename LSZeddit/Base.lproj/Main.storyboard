@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q5I-o5-pzx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hI5-nR-7Jy">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Table View Controller-->
+        <!--Top Posts-->
         <scene sceneID="64G-JR-Yqq">
             <objects>
                 <tableViewController id="q5I-o5-pzx" customClass="HomeViewTableViewController" customModule="LSZeddit" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,12 +163,31 @@
                             <outlet property="delegate" destination="q5I-o5-pzx" id="kDl-z6-7ks"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Top Posts" id="ghy-SK-N08"/>
                     <connections>
                         <outlet property="viewModel" destination="338-UA-ddW" id="xWu-lo-LlA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qVh-gT-Tmq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="338-UA-ddW" customClass="HomeViewViewModel" customModule="LSZeddit" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="1263.768115942029" y="-68.478260869565219"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="auH-se-qgK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hI5-nR-7Jy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EgK-YD-jot">
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="q5I-o5-pzx" kind="relationship" relationship="rootViewController" id="M9N-hG-J5f"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XwX-dw-DOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="356.52173913043481" y="-68.478260869565219"/>
         </scene>
