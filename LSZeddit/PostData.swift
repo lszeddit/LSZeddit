@@ -1,6 +1,5 @@
 import Foundation
 
-
 struct PostData: Codable{
     
     var title: String
