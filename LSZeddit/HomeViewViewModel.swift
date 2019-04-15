@@ -115,6 +115,8 @@ class HomeViewViewModel: NSObject{
         return cell
     }
     
+
+    
     func shouldOpenInSafari(with indexPath: IndexPath) -> Bool {
         
         

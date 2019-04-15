@@ -35,7 +35,28 @@ class HomeViewTableViewController: UITableViewController {
             self.present(safariView, animated: true, completion: nil)
         
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: Strings.saveImage.rawValue) { (action, view, handler) in
+            let cell = tableView.cellForRow(at: indexPath) as! MediaTableViewCell
+            guard let cellImage = cell.postImageView.image else {return}
+            UIImageWriteToSavedPhotosAlbum(cellImage, nil, nil, nil)
+            handler(true)
+        }
+        
+        action.backgroundColor = .green
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
     /*
     // MARK: - Navigation
 
