@@ -10,9 +10,7 @@ class RedditAPIManager {
         guard let url = URL(string: "https://www.reddit.com/top.json?limit=50") else {return}
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
             guard let data = data else {return}
-            
             do{
                 let redditResponse = try? JSONDecoder().decode(RedditResponse.self, from: data)
                 
@@ -22,7 +20,6 @@ class RedditAPIManager {
                 }
                 onComplete(successResponse)
             }
-            
         }.resume()
     }
 }

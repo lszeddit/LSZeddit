@@ -1,7 +1,6 @@
 import Foundation
 
 extension Date{
-    
     static func getAge(of epochTime: Double) -> String{
         let date = Date(timeIntervalSince1970: epochTime)
         

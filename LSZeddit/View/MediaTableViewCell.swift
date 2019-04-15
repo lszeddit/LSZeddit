@@ -2,8 +2,6 @@ import UIKit
 
 class MediaTableViewCell: UITableViewCell {
     
-    
-    
     @IBOutlet weak var postTitleLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postAuthorLabel: UILabel!
@@ -12,7 +10,6 @@ class MediaTableViewCell: UITableViewCell {
     @IBOutlet weak var postUpvoteCountLabel: UILabel!
     @IBOutlet weak var postSelfTextLabel: UILabel!
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -20,5 +17,4 @@ class MediaTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }
