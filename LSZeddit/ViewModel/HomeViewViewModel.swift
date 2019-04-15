@@ -1,5 +1,6 @@
 import Foundation
 import SDWebImage
+import SafariServices
 
 protocol HomeViewViewModelDelegate {
     func updateViews()
@@ -18,18 +19,15 @@ class HomeViewViewModel: NSObject{
     fileprivate func refreshPosts(){
         RedditAPIManager.shared.getTopPosts { (response) in
             guard let response = response as? RedditResponse else {
-                //showError
+                //TODO - Handle error
                 return
             }
-            print("RESPONSE FROM API MANAGER COMPLETION")
-            print(response.data.children.count)
-            
             self.posts = response.data.children
             self.delegate?.updateViews()
         }
     }
     
-    func getPosts() -> [Post]{
+    fileprivate func getPosts() -> [Post]{
         if posts.isEmpty{
             refreshPosts()
             return self.posts
@@ -46,8 +44,11 @@ class HomeViewViewModel: NSObject{
         return posts.count
     }
     
+    func getSafariView(for indexPath: IndexPath) -> SFSafariViewController{
+        return SFSafariViewController(url: URL(string: getItemURL(for: indexPath))!)
+    }
     
-    func getItemURL(for indexPath: IndexPath) -> String{
+    fileprivate func getItemURL(for indexPath: IndexPath) -> String{
         return posts[indexPath.row].data.url
     }
     
@@ -55,7 +56,7 @@ class HomeViewViewModel: NSObject{
         return 1
     }
     
-    func getCommentCount(for postData: PostData) -> String{
+    fileprivate func getCommentCount(for postData: PostData) -> String{
         let count = postData.commentCount
         if count < 1 || count > 1 {
             return "\(count) comments"
@@ -63,7 +64,7 @@ class HomeViewViewModel: NSObject{
         return "1 comment"
     }
     
-    func getUpvoteCount(for postData: PostData) -> String {
+    fileprivate func getUpvoteCount(for postData: PostData) -> String {
         return "\(postData.score)"
     }
     
@@ -77,7 +78,6 @@ class HomeViewViewModel: NSObject{
         
         if !postData.isSelf{
             if let hint = PostHint(rawValue: postData.postHint!){
-                
                 switch hint {
                 case PostHint.image:
                     cell.postSelfTextLabel.isHidden = true
@@ -98,7 +98,6 @@ class HomeViewViewModel: NSObject{
                     cell.postImageView.isHidden = true
                     cell.postSelfTextLabel.isHidden = true
                     break
-                    
                 default:
                     cell.postImageView.isHidden = true
                     cell.postSelfTextLabel.isHidden = true
@@ -110,39 +109,25 @@ class HomeViewViewModel: NSObject{
             cell.postSelfTextLabel.isHidden = false
             cell.postSelfTextLabel.text = postData.selfText
         }
-        
-        
         return cell
     }
     
-
-    
-    func shouldOpenInSafari(with indexPath: IndexPath) -> Bool {
-        
-        
-        let postData = posts[indexPath.row].data
-        if !postData.isSelf{
-            if let hint = PostHint(rawValue: postData.postHint!){
-                switch hint {
-                case PostHint.image:
-                    return false
-                default:
-                    return true
-                }
-            }
+    func getSwipeConfiguration(for cell: MediaTableViewCell) -> UISwipeActionsConfiguration?{
+        if !cell.postImageView.isHidden {
+            return saveImageConfiguration(for: cell)
         }
-        return true
+        return nil
     }
     
-    func handleSelection(at indexPath: IndexPath){
-        
+    fileprivate func saveImageConfiguration(for cell: MediaTableViewCell) -> UISwipeActionsConfiguration{
+        let action = UIContextualAction(style: .normal, title: Strings.saveImage.rawValue) { (action, view, handler) in
+            guard let cellImage = cell.postImageView.image else {return}
+            UIImageWriteToSavedPhotosAlbum(cellImage, nil, nil, nil)
+            handler(true)
+        }
+        action.backgroundColor = .blue
+        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 
-enum PostHint: String {
-    case image = "image"
-    case isSelf = "self"
-    case hostedVideo = "hosted:video"
-    case richVideo = "rich:video"
-    case link = "link"
-}
+
